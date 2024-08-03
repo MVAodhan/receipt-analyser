@@ -6,6 +6,7 @@ import { auth } from "@clerk/nextjs/server";
 import { db } from "../db";
 import { UserTable } from "../db/schema";
 import { eq } from "drizzle-orm";
+import ReceiptItems from "./ReceiptItems";
 export async function Dashboard() {
   const { userId } = auth();
 
@@ -20,14 +21,14 @@ export async function Dashboard() {
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link href="/" className="flex items-center gap-2 font-semibold">
-              <span>DAS</span>
+              <span>Receipt Analyser</span>
             </Link>
           </div>
         </div>
       </div>
       <div className="flex flex-col">
         <header className="flex h-14 items-center justify-end gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-          <SignedOut>
+          {/* <SignedOut>
             <SignInButton />
           </SignedOut>
           <SignedIn>
@@ -35,19 +36,26 @@ export async function Dashboard() {
               <span>Credits: {credits[0].credits}</span>
             )}
             <UserButton />
-          </SignedIn>
+          </SignedIn> */}
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           <div
             className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
             x-chunk="dashboard-02-chunk-1"
           >
-            <SignedOut>
+            <div className="w-1/2 h-full"></div>
+            <div className="w-1/2 h-full ">
+              <div className="w-11/12 h-11/12 overflow-scroll">
+                <ReceiptItems />
+              </div>
+            </div>
+
+            {/* <SignedOut>
               <span>Please sign in to use the resizer</span>
             </SignedOut>
             <SignedIn>
               <Resize credits={credits[0]?.credits!} />
-            </SignedIn>
+            </SignedIn> */}
           </div>
         </main>
       </div>
