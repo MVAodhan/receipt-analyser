@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { CircleUser, DollarSign, Menu, Package2 } from "lucide-react";
 
@@ -17,7 +19,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Table,
@@ -27,11 +28,54 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-import lineItems from "../../../receipt.json";
 import { DonutChart } from "./DonutChart";
 
+// import lineItems from "../receipt.json";
+import sorted from "../sorted.json";
+import { useEffect, useState } from "react";
+import { nanoid } from "nanoid";
+import CategoryMenu from "./CategoryMenu";
+import { ReceiptItem } from "../types";
+
 export function Dashboard() {
+  const [lineItems, setLineItems] = useState<ReceiptItem[]>([]);
+  const [categories, setCategories] = useState<any>();
+
+  const receiptItemsFunction = () => {
+    let items: ReceiptItem[] = [];
+    let categories: any[] = [];
+
+    for (let category of sorted.categories) {
+      categories = [
+        ...categories,
+        { id: nanoid(), name: category.name, items: category.items },
+      ];
+      for (let item of category.items) {
+        items = [
+          ...items,
+          {
+            id: nanoid(),
+            name: item.name,
+            price: item.price,
+            category: category.name,
+          },
+        ];
+      }
+    }
+
+    setLineItems(items);
+    setCategories(categories);
+
+    // return { items, categories };
+  };
+
+  useEffect(() => {
+    receiptItemsFunction();
+  }, []);
+  // const { items: lineItems, categories } = receiptItemsFunction();
+
+  // console.log(categories);
+
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className=" flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -144,27 +188,17 @@ export function Dashboard() {
         </div>
       </header>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 md:gap-8 ">
           <Card x-chunk="dashboard-01-chunk-0">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Receipt Total
-              </CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold ">
-                {`$${lineItems.reduce((acc, v) => acc + v.price, 0)}
-                  `}
-              </div>
+              {lineItems && (
+                <DonutChart lineItems={lineItems} categories={categories} />
+              )}
             </CardContent>
           </Card>
-          {/* <Card x-chunk="dashboard-01-chunk-1"></Card>
-          <Card x-chunk="dashboard-01-chunk-2"></Card>
-          <Card x-chunk="dashboard-01-chunk-3"></Card> */}
         </div>
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3 ">
-          <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
+          <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-1">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
                 <CardTitle>Receipt Transactions</CardTitle>
@@ -178,40 +212,32 @@ export function Dashboard() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Name</TableHead>
+                    <TableHead>Category</TableHead>
                     <TableHead className="text-right">Amount</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {lineItems.map((item, i) => (
-                    <TableRow key={i}>
-                      <TableCell>
-                        <div className="font-medium">{item.name}</div>
-                      </TableCell>
-                      <TableCell className="text-right">{`$${item.price}`}</TableCell>
-                      <TableCell>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="25"
-                          height="25"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            fill="#888888"
-                            d="M13 4v7h7v2h-7v7h-2v-7H4v-2h7V4z"
+                  {lineItems &&
+                    lineItems.map((item) => (
+                      <TableRow key={item.id}>
+                        <TableCell>
+                          <div className="font-medium">{item.name}</div>
+                        </TableCell>
+                        <TableCell>
+                          <CategoryMenu
+                            category={
+                              item.category ? item.category : "No Category"
+                            }
+                            categories={categories}
                           />
-                        </svg>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                        </TableCell>
+                        <TableCell className="text-right">{`$${item.price}`}</TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </CardContent>
           </Card>
-          <div>
-            <Card x-chunk="dashboard-01-chunk-5">
-              <DonutChart />
-            </Card>
-          </div>
         </div>
       </main>
     </div>
