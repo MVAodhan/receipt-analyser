@@ -34,6 +34,7 @@ import { DonutChart } from "./DonutChart";
 import sorted from "../sorted.json";
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
+import chroma from "chroma-js";
 import CategoryMenu from "./CategoryMenu";
 import { ReceiptItem } from "../types";
 
@@ -48,7 +49,12 @@ export function Dashboard() {
     for (let category of sorted.categories) {
       categories = [
         ...categories,
-        { id: nanoid(), name: category.name, items: category.items },
+        {
+          id: nanoid(),
+          name: category.name,
+          items: category.items,
+          color: chroma.random(),
+        },
       ];
       for (let item of category.items) {
         items = [
@@ -63,8 +69,8 @@ export function Dashboard() {
       }
     }
 
-    setLineItems(items);
     setCategories(categories);
+    setLineItems(items);
 
     // return { items, categories };
   };
@@ -72,9 +78,8 @@ export function Dashboard() {
   useEffect(() => {
     receiptItemsFunction();
   }, []);
-  // const { items: lineItems, categories } = receiptItemsFunction();
 
-  // console.log(categories);
+  console.log(chroma.random());
 
   return (
     <div className="flex min-h-screen w-full flex-col">
