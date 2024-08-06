@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CircleUser, DollarSign, Menu, Package2 } from "lucide-react";
+import { CircleUser, Menu, Package2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -42,8 +42,7 @@ export function Dashboard() {
   const [lineItems, setLineItems] = useState<ReceiptItem[]>([]);
   const [categories, setCategories] = useState<any>();
 
-  const receiptItemsFunction = () => {
-    let items: ReceiptItem[] = [];
+  const genCategories = () => {
     let categories: any[] = [];
 
     for (let category of sorted.categories) {
@@ -53,9 +52,18 @@ export function Dashboard() {
           id: nanoid(),
           name: category.name,
           items: category.items,
-          color: chroma.random(),
+          color: chroma.random().hex(),
         },
       ];
+    }
+
+    setCategories(categories);
+  };
+
+  const genItems = () => {
+    let items: ReceiptItem[] = [];
+    for (let category of categories) {
+      const color = category.color;
       for (let item of category.items) {
         items = [
           ...items,
@@ -64,22 +72,28 @@ export function Dashboard() {
             name: item.name,
             price: item.price,
             category: category.name,
+            color: color,
           },
         ];
       }
     }
-
-    setCategories(categories);
     setLineItems(items);
-
-    // return { items, categories };
   };
 
+  console.log(lineItems);
+
   useEffect(() => {
-    receiptItemsFunction();
+    genCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(chroma.random());
+  useEffect(() => {
+    if (categories) {
+      genItems();
+    }
+  }, [categories]);
+  // console.log("categories", categories);
+  // console.log("lineItems", lineItems);
 
   return (
     <div className="flex min-h-screen w-full flex-col">
@@ -234,6 +248,7 @@ export function Dashboard() {
                               item.category ? item.category : "No Category"
                             }
                             categories={categories}
+                            itemBGColor={item.color}
                           />
                         </TableCell>
                         <TableCell className="text-right">{`$${item.price}`}</TableCell>

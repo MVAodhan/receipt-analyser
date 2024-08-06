@@ -3,6 +3,7 @@ export interface ReceiptItem {
   name: string;
   price: number;
   category?: string;
+  color?: string;
 }
 
 export interface Category {
