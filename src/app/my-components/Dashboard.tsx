@@ -80,8 +80,6 @@ export function Dashboard() {
     setLineItems(items);
   };
 
-  console.log(lineItems);
-
   useEffect(() => {
     genCategories();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -92,7 +90,7 @@ export function Dashboard() {
       genItems();
     }
   }, [categories]);
-  // console.log("categories", categories);
+  console.log("categories", categories);
   // console.log("lineItems", lineItems);
 
   return (
@@ -238,7 +236,7 @@ export function Dashboard() {
                 <TableBody>
                   {lineItems &&
                     lineItems.map((item) => (
-                      <TableRow key={item.id}>
+                      <TableRow key={item.id} id={item.id}>
                         <TableCell>
                           <div className="font-medium">{item.name}</div>
                         </TableCell>
@@ -248,6 +246,7 @@ export function Dashboard() {
                               item.category ? item.category : "No Category"
                             }
                             categories={categories}
+                            lineItem={item}
                             itemBGColor={item.color}
                           />
                         </TableCell>

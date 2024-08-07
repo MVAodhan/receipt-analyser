@@ -5,17 +5,32 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Category } from "../types";
-import chroma from "chroma-js";
 
 const CategoryMenu = ({
   category,
   categories,
   itemBGColor,
+  lineItem,
 }: {
   category: string;
   categories?: any;
   itemBGColor: any;
+  lineItem: any;
 }) => {
+  const changeCategory = (e: any) => {
+    // console.log(categories);
+    // console.log(lineItem);
+    const oldCategory = categories.find(
+      (category: any) => category.name === lineItem.category
+    );
+    const newCategoryID = e.target.id;
+    const newCategory = categories.find(
+      (category: any) => category.id === newCategoryID
+    );
+    console.log("old category ", oldCategory);
+    console.log("new category", newCategory);
+    console.log("new category id", newCategoryID);
+  };
   return (
     <>
       <DropdownMenu>
@@ -27,12 +42,15 @@ const CategoryMenu = ({
             {category}
             <DropdownMenuContent>
               {categories.map((category: Category) => {
-                const categoryColor = `bg-[${category.color}]`;
                 return (
                   <DropdownMenuItem
                     key={category.id}
+                    id={category.id}
                     style={{ backgroundColor: category.color }}
                     className="m-2 text-white rounded-md"
+                    onSelect={(e) => {
+                      changeCategory(e);
+                    }}
                   >
                     {category.name}
                   </DropdownMenuItem>
