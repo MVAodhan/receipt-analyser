@@ -87,6 +87,7 @@ export function Dashboard() {
 
   useEffect(() => {
     if (categories) {
+      ("use effect categories");
       genItems();
     }
   }, [categories]);
@@ -247,6 +248,9 @@ export function Dashboard() {
                             }
                             categories={categories}
                             lineItem={item}
+                            lineItems={lineItems}
+                            setLineItems={setLineItems}
+                            setCategories={setCategories}
                             itemBGColor={item.color}
                           />
                         </TableCell>

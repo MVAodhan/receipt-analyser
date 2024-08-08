@@ -1,3 +1,4 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -5,32 +6,52 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Category } from "../types";
+import { useState } from "react";
 
 const CategoryMenu = ({
   category,
   categories,
   itemBGColor,
   lineItem,
+  lineItems,
+  setLineItems,
+  setCategories,
 }: {
   category: string;
   categories?: any;
   itemBGColor: any;
   lineItem: any;
+  lineItems: any;
+  setLineItems: any;
+  setCategories: any;
 }) => {
   const changeCategory = (e: any) => {
     // console.log(categories);
     // console.log(lineItem);
+    // const category = categories.find()
+
     const oldCategory = categories.find(
       (category: any) => category.name === lineItem.category
     );
+
+    const lineItemIndex = lineItems.findIndex(
+      (item: any) => item.id === lineItem.id
+    );
+
     const newCategoryID = e.target.id;
     const newCategory = categories.find(
       (category: any) => category.id === newCategoryID
     );
-    console.log("old category ", oldCategory);
-    console.log("new category", newCategory);
-    console.log("new category id", newCategoryID);
+    const newCategoryName = newCategory.name;
+
+    let newItem = { ...lineItem, category: newCategoryName };
+
+    lineItems.splice(lineItemIndex, 1, newItem);
+    console.log(lineItems);
+
+    setLineItems([...lineItems]);
   };
+
   return (
     <>
       <DropdownMenu>
