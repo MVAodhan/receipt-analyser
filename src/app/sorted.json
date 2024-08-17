@@ -7,126 +7,120 @@
       "name": "Bakery",
       "items": [
         {
-          "id": "9876543210987654321",
+          "id": "2345678909876543212",
+          "name": "Chocolate Twist 2pk",
+          "price": 5.5
+        },
+        {
+          "id": "3456789098765432123",
           "name": "Burger Bun Sesame 6pk",
           "price": 3.9
         },
         {
-          "id": "5432109876543210987",
-          "name": "Chocolate Twist 2pk",
-          "price": 5.5
-        }
-      ]
-    },
-    {
-      "id": "2345678909876543210",
-      "name": "Produce",
-      "items": [
-        {
-          "id": "6789098765432109876",
-          "name": "Apple Simply Red Hd",
+          "id": "4567890987654321234",
+          "name": "Apple Simply Red 1d",
           "price": 2.42
-        },
-        {
-          "id": "3210987654321098765",
-          "name": "Organic Kiwifruit Gold 700g P/P",
-          "price": 4.5
-        },
-        {
-          "id": "7890987654321098765",
-          "name": "Orange Cara Cara 1kg",
-          "price": 4.6
         }
       ]
     },
     {
-      "id": "4567890987654321098",
-      "name": "Frozen",
+      "id": "5678901234567890987",
+      "name": "Frozen Foods",
       "items": [
         {
-          "id": "1098765432109876543",
+          "id": "6789012345678901234",
           "name": "Arnotts Shapes Original Pizza 190g",
           "price": 6.0
         }
       ]
     },
     {
-      "id": "5678909876543210987",
-      "name": "Snacks",
+      "id": "7890123456789012345",
+      "name": "Snacks & Bars",
       "items": [
         {
-          "id": "2109876543210987654",
+          "id": "8901234567890123456",
           "name": "Tasti Protein Bar Choc Almond 200g",
           "price": 9.6
         },
         {
-          "id": "3210987654321098765",
+          "id": "9012345678901234567",
           "name": "Scorched Peanut Bar 45g",
           "price": 2.19
         },
         {
-          "id": "4321098765432109876",
+          "id": "0123456789012345678",
           "name": "Griffins Cookies Dble Choc Chunk 200g",
           "price": 4.0
         }
       ]
     },
     {
-      "id": "6789098765432109876",
+      "id": "1234567890123456789",
       "name": "Beverages",
       "items": [
         {
-          "id": "5432109876543210987",
+          "id": "2345678901234567890",
           "name": "Nippys Flav Milk Iced Coffee 500ml",
           "price": 4.49
         },
         {
-          "id": "6543210987654321098",
-          "name": "Dr Pepper 355ml",
-          "price": 2.5
-        },
-        {
-          "id": "7654321098765432109",
+          "id": "3456789012345678901",
           "name": "Kiwi Blue Lightly Sparkling Lime 1.25L",
           "price": 1.7
+        },
+        {
+          "id": "4567890123456789012",
+          "name": "Dr Pepper 355ml",
+          "price": 2.5
         }
       ]
     },
     {
-      "id": "8765432109876543210",
-      "name": "Dairy",
+      "id": "5678901234567890123",
+      "name": "Dairy & Eggs",
       "items": [
         {
-          "id": "9876543210987654321",
+          "id": "6789012345678901234",
           "name": "Cadbury Dream Oreo Block 170g",
           "price": 5.49
         },
         {
-          "id": "1098765432109876543",
+          "id": "7890123456789012345",
           "name": "Anc Zero Lacto Blue 1L",
           "price": 4.83
         }
       ]
     },
     {
-      "id": "2109876543210987654",
-      "name": "Meat",
+      "id": "8901234567890123456",
+      "name": "Chips & Crisps",
       "items": [
         {
-          "id": "3210987654321098765",
-          "name": "Tegel Free Range Crunchy Burger 650g",
-          "price": 14.4
+          "id": "9012345678901234567",
+          "name": "TGB Pukekohe Agria Crinkle Cutfries 1kg",
+          "price": 5.0
         }
       ]
     },
     {
-      "id": "4321098765432109876",
-      "name": "Miscellaneous",
+      "id": "0123456789012345678",
+      "name": "Produce",
       "items": [
         {
-          "id": "5432109876543210987",
-          "name": "TGB Pukekohe Agria Crinkle Cutfries 1kg",
-          "price": 5.0
+          "id": "1234567890123456789",
+          "name": "Organic Kiwifruit Gold 700g P/P",
+          "price": 4.5
+        },
+        {
+          "id": "2345678901234567890",
+          "name": "Tegel Free Range Crunchy Burger 650g",
+          "price": 14.4
+        },
+        {
+          "id": "3456789012345678901",
+          "name": "Orange Cara Cara 1kg",
+          "price": 4.6
         }
       ]
     }

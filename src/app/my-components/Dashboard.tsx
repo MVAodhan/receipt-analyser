@@ -42,6 +42,24 @@ export function Dashboard() {
   const [lineItems, setLineItems] = useState<ReceiptItem[]>([]);
   const [categories, setCategories] = useState<any>();
 
+  const genCategoryItems = (category: any) => {
+    const color = category.color;
+    let items: any[] = [];
+    for (let item of category.items) {
+      items = [
+        ...items,
+        {
+          id: nanoid(),
+          name: item.name,
+          price: item.price,
+          category: category.name,
+          color: color,
+        },
+      ];
+    }
+    return items;
+  };
+
   const genCategories = () => {
     let categories: any[] = [];
 
@@ -49,9 +67,9 @@ export function Dashboard() {
       categories = [
         ...categories,
         {
-          id: nanoid(),
+          id: category.id,
           name: category.name,
-          items: category.items,
+          items: genCategoryItems(category),
           color: chroma.random().hex(),
         },
       ];
@@ -68,7 +86,7 @@ export function Dashboard() {
         items = [
           ...items,
           {
-            id: nanoid(),
+            id: item.id,
             name: item.name,
             price: item.price,
             category: category.name,

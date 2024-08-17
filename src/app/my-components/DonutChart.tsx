@@ -107,6 +107,7 @@ export function DonutChart({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categories]);
 
+  console.log(categories);
   return (
     <>
       {generatedConfig && generatedChartData && (
