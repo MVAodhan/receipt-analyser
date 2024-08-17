@@ -25,6 +25,7 @@ const CategoryMenu = ({
   setLineItems: any;
   setCategories: any;
 }) => {
+  const [rerender, setRerender] = useState(false);
   const removeCatergory = () => {};
   const changeCategory = (e: any) => {
     const oldCategory = categories.find(
@@ -49,11 +50,26 @@ const CategoryMenu = ({
     };
 
     console.log(oldCategory);
-    console.log(newCategory);
+    console.log(categories);
+    if (oldCategory.items.length === 1) {
+      const oldCategoryIndex = categories.findIndex(
+        (category: any) => category.id === oldCategory.id
+      );
 
-    console.log(lineItem.id);
-    // console.log(oldCategoryItem);
-    console.log("old item index", oldCategoryItemIndex);
+      categories.splice(oldCategoryIndex, 1);
+      console.log(newItem);
+      newCategory.items.splice(1, 0, newItem);
+      // lineItems.splice(oldCategoryItemIndex, 1);
+      setCategories([...categories]);
+    }
+    console.log([...categories]);
+    // console.log(lineItems);
+
+    // console.log(newCategory);
+
+    // console.log(lineItem.id);
+    // // console.log(oldCategoryItem);
+    // console.log("old item index", oldCategoryItemIndex);
   };
 
   return (

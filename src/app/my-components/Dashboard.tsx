@@ -104,6 +104,7 @@ export function Dashboard() {
   }, []);
 
   useEffect(() => {
+    ("use effect categories outside if");
     if (categories) {
       ("use effect categories");
       genItems();
